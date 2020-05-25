@@ -21,7 +21,7 @@ class News extends Model
 
     public function blogers()
     {
-        return $this->belongsToMany('App\Blogers', 'Bloger_news', 'news_id', 'bloger_id_id');
+        return $this->belongsToMany('App\Bloger', 'Bloger_news', 'news_id', 'bloger_id');
     }
 
 }

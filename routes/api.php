@@ -30,4 +30,12 @@ Route::middleware('auth:api')->group(function () {
         return true;
     })->name('blogers.news');
 
+    Route::get('news/{news}/relationships/blogers', function(){
+        return true;
+    })->name('news.relationships.blogers');
+
+    Route::get('news/{news}/blogers', function(){
+        return true;
+    })->name('news.blogers');
+
 });

@@ -25,11 +25,17 @@ Route::middleware('auth:api')->group(function () {
     Route::get('blogers/{bloger}/relationships/news', 'BlogersNewsRelationshipsController@index')
         ->name('blogers.relationships.news');
 
+    Route::patch('blogers/{bloger}/relationships/news', 'BlogersNewsRelationshipsController@update')
+        ->name('blogers.relationships.news');
+
     Route::get('blogers/{bloger}/news', function(){
         return true;
     })->name('blogers.news');
 
     Route::get('news/{news}/relationships/blogers', 'NewsBlogersRelationshipsController@index')
+        ->name('news.relationships.blogers');
+
+    Route::patch('news/{news}/relationships/blogers', 'NewsBlogersRelationshipsController@update')
         ->name('news.relationships.blogers');
 
     Route::get('news/{news}/blogers', function(){

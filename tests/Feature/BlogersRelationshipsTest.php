@@ -67,10 +67,44 @@ class BlogersRelationshipsTest extends TestCase
             ]);
     }
 
+    /**
+     * @test
+     * @watch
+     */
+    public function a_relationship_link_to_authors_returns_all_related_authors_as_resource_id_objects()
+    {
+        $bloger = factory(Bloger::class)->create();
+        $news = factory(News::class, 3)->create();
+//        $bloger->authors()->sync($news->pluck('id'));
+        $this->mysync($bloger, $news);
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+        $this->getJson('/api/blogers/1/relationships/news', [
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json',
+        ])
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    [
+                        'id' => '1',
+                        'type' => 'news',
+                    ],
+                    [
+                        'id' => '2',
+                        'type' => 'news',
+                    ],
+                    [
+                        'id' => '3',
+                        'type' => 'news',
+                    ],
+                ]
+            ]);
+    }
+
     public function mysync($bloger, $news)
     {
-        foreach($news as $new)
-        {
+        foreach ($news as $new) {
             DB::table('bloger_news')->insert(
                 ['bloger_id' => $bloger->id, 'news_id' => $new->id]);
         }

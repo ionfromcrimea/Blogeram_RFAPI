@@ -22,17 +22,15 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('news', 'NewsController');
 
-    Route::get('blogers/{bloger}/relationships/news', function(){
-        return true;
-    })->name('blogers.relationships.news');
+    Route::get('blogers/{bloger}/relationships/news', 'BlogersNewsRelationshipsController@index')
+        ->name('blogers.relationships.news');
 
     Route::get('blogers/{bloger}/news', function(){
         return true;
     })->name('blogers.news');
 
-    Route::get('news/{news}/relationships/blogers', function(){
-        return true;
-    })->name('news.relationships.blogers');
+    Route::get('news/{news}/relationships/blogers', 'NewsBlogersRelationshipsController@index')
+        ->name('news.relationships.blogers');
 
     Route::get('news/{news}/blogers', function(){
         return true;

@@ -157,7 +157,7 @@ class BlogersRelationshipsTest extends TestCase
      * @test
      * @watch
      */
-    public function it_returns_a_404_not_found_when_trying_to_add_relationship_to_a_non_existing_()
+    public function it_returns_a_404_not_found_when_trying_to_add_relationship_to_a_non_existing_page()
     {
         $bloger = factory(Bloger::class)->create();
         $news = factory(News::class, 5)->create();
@@ -207,6 +207,56 @@ class BlogersRelationshipsTest extends TestCase
                 ]
             ]
         ]);
+    }
+
+    /**
+     * @test
+     * @watch
+     */
+    public function it_can_get_all_related_news_as_resource_objects_from_related_link()
+    {
+        $bloger = factory(Bloger::class)->create();
+        $news = factory(News::class, 3)->create();
+//        $book->authors()->sync($authors->pluck('id'));
+        $this->mysync($bloger, $news);
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+        $this->getJson('/api/blogers/1/news', [
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json',
+        ])
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    [
+                        "id" => '1',
+                        "type" => "news",
+                        "attributes" => [
+                            'title' => $news[0]->title,
+                            'created_at' => $news[0]->created_at->toJSON(),
+                            'updated_at' => $news[0]->updated_at->toJSON(),
+                        ]
+                    ],
+                    [
+                        "id" => '2',
+                        "type" => "news",
+                        "attributes" => [
+                            'title' => $news[1]->title,
+                            'created_at' => $news[1]->created_at->toJSON(),
+                            'updated_at' => $news[1]->updated_at->toJSON(),
+                        ]
+                    ],
+                    [
+                        "id" => '3',
+                        "type" => "news",
+                        "attributes" => [
+                            'title' => $news[2]->title,
+                            'created_at' => $news[2]->created_at->toJSON(),
+                            'updated_at' => $news[2]->updated_at->toJSON(),
+                        ]
+                    ],
+                ]
+            ]);
     }
 
 //    **************************************************************

@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class NewsCollection extends ResourceCollection
 {
+    public $collects = NewsResource::class;
+
     /**
      * Transform the resource collection into an array.
      *

@@ -6,6 +6,8 @@ use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class BlogersCollection extends ResourceCollection
 {
+    public $collects = BlogersResource::class;
+
     /**
      * Transform the resource collection into an array.
      *

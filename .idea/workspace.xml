@@ -3,9 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="0b675ed3-e245-467d-bb1e-06a8c36a10e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exceptions/Handler.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exceptions/Handler.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BlogersNewsRelationshipsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BlogersNewsRelationshipsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsBlogersRelationshipsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsBlogersRelationshipsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/BlogersCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/BlogersCollection.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/NewsCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NewsCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/BlogersRelationshipsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/BlogersRelationshipsTest.php" afterDir="false" />
     </list>
@@ -188,7 +187,7 @@
       <workItem from="1589873581993" duration="42990000" />
       <workItem from="1590142060123" duration="13068000" />
       <workItem from="1590404285443" duration="1407000" />
-      <workItem from="1590406732700" duration="10692000" />
+      <workItem from="1590406732700" duration="13341000" />
     </task>
     <servers />
   </component>

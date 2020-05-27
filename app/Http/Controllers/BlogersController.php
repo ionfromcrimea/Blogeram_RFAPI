@@ -6,6 +6,7 @@ use App\Bloger;
 use App\Http\Requests\CreateBlogerRequest;
 use App\Http\Requests\UpdateBlogerRequest;
 use App\Http\Resources\BlogersResource;
+use App\Http\Resources\BlogersCollection;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -19,21 +20,24 @@ class BlogersController extends Controller
      */
     public function index()
     {
-        $blogers = QueryBuilder::for(Bloger::class)->allowedSorts([
-            'login',
-            'password',
-            'status',
-            'created_at',
-            'updated_at',
-        ])->allowedFilters([
-            'login',
-            'password',
-            'status',
-            AllowedFilter::scope('scopeStatus'),
-            AllowedFilter::exact('login'),
-        ])->jsonPaginate();
-
-        return BlogersResource::collection($blogers);
+        $blogers = QueryBuilder::for(Bloger::class)
+            ->allowedSorts([
+                'login',
+                'password',
+                'status',
+                'created_at',
+                'updated_at',
+            ])->allowedFilters([
+                'login',
+                'password',
+                'status',
+                AllowedFilter::scope('scopeStatus'),
+                AllowedFilter::exact('login'),
+            ])->allowedIncludes('news')
+            ->jsonPaginate();
+//        return response($blogers);
+        return new BlogersCollection($blogers);
+//        return BlogersResource::collection($blogers);
 //        $bloger = Bloger::find(1);
 //        dd($bloger->news);
     }

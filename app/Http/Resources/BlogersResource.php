@@ -50,17 +50,6 @@ class BlogersResource extends JsonResource
         ];
     }
 
-//    public function included($request)
-//    {
-//        return collect($this->relations())
-//            ->filter(function ($resource) {
-//                return $resource->collection !== null;
-//            })
-//            ->flatMap(function ($resource) use ($request) {
-//                return $resource->toArray($request);
-//            })
-//            ;
-//    }
     public function included($request)
     {
         return collect($this->relations())

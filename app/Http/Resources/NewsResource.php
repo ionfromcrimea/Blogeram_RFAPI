@@ -55,11 +55,7 @@ class NewsResource extends JsonResource
         return collect($this->relations())
             ->filter(function ($resource) {
                 return $resource->collection !== null;
-            })
-            ->flatMap(function ($resource) use ($request) {
-                return $resource->toArray($request);
-            })
-            ;
+            })->flatMap->toArray($request);
     }
 
     public function with($request)

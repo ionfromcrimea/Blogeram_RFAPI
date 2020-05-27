@@ -5,7 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BlogersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BlogersController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/BlogersCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/BlogersCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/BlogersResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/BlogersResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/NewsCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NewsCollection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Resources/NewsResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NewsResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/BlogersRelationshipsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/BlogersRelationshipsTest.php" afterDir="false" />
     </list>
@@ -188,7 +190,8 @@
       <workItem from="1589873581993" duration="42990000" />
       <workItem from="1590142060123" duration="13068000" />
       <workItem from="1590404285443" duration="1407000" />
-      <workItem from="1590406732700" duration="23315000" />
+      <workItem from="1590406732700" duration="30875000" />
+      <workItem from="1590582828897" duration="253000" />
     </task>
     <servers />
   </component>
@@ -200,7 +203,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

@@ -302,9 +302,9 @@ class BlogersRelationshipsTest extends TestCase
                                     'type' => 'news'
                                 ],
                                 [
-                                'id' => (string)$news->get(2)->id,
-                                'type' => 'news'
-                            ]
+                                    'id' => (string)$news->get(2)->id,
+                                    'type' => 'news'
+                                ]
                             ]
                         ]
                     ]
@@ -339,6 +339,149 @@ class BlogersRelationshipsTest extends TestCase
                     ],
                 ]
             ]);
+    }
+
+    /**
+     * @test
+     * @watch
+     */
+    public function it_includes_related_resource_objects_for_a_collection_when_an_include_query_()
+    {
+        $blogers = factory(Bloger::class, 3)->create();
+        $news = factory(News::class, 3)->create();
+        $blogers->each(function ($bloger, $key) use ($news) {
+            if ($key === 0) {
+//                $book->authors()->sync($news->pluck('id'));
+                $this->mysync($bloger, $news);
+            }
+        });
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+        $this->get('/api/blogers?include=news', [
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json',
+        ])->assertStatus(200)->assertJson([
+            "data" => [
+                [
+                    "id" => '1',
+                    "type" => "blogers",
+                    "attributes" => [
+                        'login' => $blogers[0]->login,
+                        'password' => $blogers[0]->password,
+                        'status' => $blogers[0]->status,
+                        'created_at' => $blogers[0]->created_at->toJSON(),
+                        'updated_at' => $blogers[0]->updated_at->toJSON(),
+                    ],
+                    'relationships' => [
+                        'news' => [
+                            'links' => [
+                                'self' => route(
+                                    'blogers.relationships.news',
+                                    ['bloger' => $blogers[0]->id]
+                                ),
+                                'related' => route(
+                                    'blogers.news',
+                                    ['bloger' => $blogers[0]->id]
+                                ),
+                            ],
+                            'data' => [
+                                [
+                                    'id' => $news->get(0)->id,
+                                    'type' => 'news'
+                                ],
+                                [
+                                    'id' => $news->get(1)->id,
+                                    'type' => 'news'
+                                ],
+                                [
+                                    'id' => $news->get(2)->id,
+                                    'type' => 'news'
+                                ]
+                            ]
+                        ]
+                    ]
+                ],
+                [
+                    "id" => '2',
+                    "type" => "blogers",
+                    "attributes" => [
+                        'login' => $blogers[1]->login,
+                        'password' => $blogers[1]->password,
+                        'status' => $blogers[1]->status,
+                        'created_at' => $blogers[1]->created_at->toJSON(),
+                        'updated_at' => $blogers[1]->updated_at->toJSON(),
+                    ],
+                    'relationships' => [
+                        'news' => [
+                            'links' => [
+                                'self' => route(
+                                    'blogers.relationships.news',
+                                    ['bloger' => $blogers[1]->id]
+                                ),
+                                'related' => route(
+                                    'blogers.news',
+                                    ['bloger' => $blogers[1]->id]
+                                ),
+                            ],
+                        ]
+                    ]
+                ],
+                [
+                    "id" => '3',
+                    "type" => "blogers",
+                    "attributes" => [
+                        'login' => $blogers[2]->login,
+                        'password' => $blogers[2]->password,
+                        'status' => $blogers[2]->status,
+                        'created_at' => $blogers[2]->created_at->toJSON(),
+                        'updated_at' => $blogers[2]->updated_at->toJSON(),
+                    ],
+                    'relationships' => [
+                        'news' => [
+                            'links' => [
+                                'self' => route(
+                                    'blogers.relationships.news',
+                                    ['bloger' => $blogers[2]->id]
+                                ),
+                                'related' => route(
+                                    'blogers.news',
+                                    ['bloger' => $blogers[2]->id]
+                                ),
+                            ],
+                        ]
+                    ]
+                ],
+            ],
+            'included' => [
+                [
+                    "id" => '1',
+                    "type" => "news",
+                    "attributes" => [
+                        'title' => $news[0]->title,
+                        'created_at' => $news[0]->created_at->toJSON(),
+                        'updated_at' => $news[0]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '2',
+                    "type" => "news",
+                    "attributes" => [
+                        'title' => $news[1]->title,
+                        'created_at' => $news[1]->created_at->toJSON(),
+                        'updated_at' => $news[1]->updated_at->toJSON(),
+                    ]
+                ],
+                [
+                    "id" => '3',
+                    "type" => "news",
+                    "attributes" => [
+                        'title' => $news[2]->title,
+                        'created_at' => $news[2]->created_at->toJSON(),
+                        'updated_at' => $news[2]->updated_at->toJSON(),
+                    ]
+                ],
+            ]
+        ]);
     }
 
 //    **************************************************************

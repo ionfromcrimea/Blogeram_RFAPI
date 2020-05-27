@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateNewsRequest;
 use App\Http\Requests\UpdateNewsRequest;
 use App\Http\Resources\NewsResource;
+use App\Http\Resources\NewsCollection;
 use App\News;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -28,9 +29,11 @@ class NewsController extends Controller
             'title',
             'news',
             'list1',
-        ])->jsonPaginate();
+        ])->allowedIncludes('blogers')
+            ->jsonPaginate();
 
-        return NewsResource::collection($news);
+        return new NewsCollection($news);
+//        return NewsResource::collection($news);
     }
 
     /**
@@ -46,7 +49,7 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(CreateNewsRequest $request)
@@ -67,7 +70,7 @@ class NewsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\News  $news
+     * @param \App\News $news
      * @return \Illuminate\Http\Response
      */
     public function show(News $news)
@@ -83,7 +86,7 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\News  $news
+     * @param \App\News $news
      * @return \Illuminate\Http\Response
      */
     public function edit(News $news)
@@ -94,8 +97,8 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\News  $news
+     * @param \Illuminate\Http\Request $request
+     * @param \App\News $news
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateNewsRequest $request, News $news)
@@ -107,7 +110,7 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\News  $news
+     * @param \App\News $news
      * @return \Illuminate\Http\Response
      */
     public function destroy(News $news)

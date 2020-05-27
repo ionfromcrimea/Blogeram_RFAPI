@@ -76,7 +76,11 @@ class BlogersController extends Controller
     public function show(Bloger $bloger)
     {
 //        return $bloger;
-        return new BlogersResource($bloger);
+//        return new BlogersResource($bloger);
+        $query = QueryBuilder::for(Bloger::where('id', $bloger->id))
+            ->allowedIncludes('news')
+            ->firstOrFail();
+        return new BlogersResource($query);
     }
 
     /**

@@ -37,9 +37,38 @@ class NewsResource extends JsonResource
                         ),
                     ],
                     'data' => BlogersIdentifierResource::collection(
-                        $this->blogers),
+                        $this->whenLoaded('blogers')),
                 ],
             ]
         ];
     }
+
+    private function relations()
+    {
+        return [
+            BlogersResourceShort::collection($this->whenLoaded('blogers')),
+        ];
+    }
+
+    public function included($request)
+    {
+        return collect($this->relations())
+            ->filter(function ($resource) {
+                return $resource->collection !== null;
+            })
+            ->flatMap(function ($resource) use ($request) {
+                return $resource->toArray($request);
+            })
+            ;
+    }
+
+    public function with($request)
+    {
+        $with = [];
+        if ($this->included($request)->isNotEmpty()) {
+            $with['included'] = $this->included($request);
+        }
+        return $with;
+    }
+
 }

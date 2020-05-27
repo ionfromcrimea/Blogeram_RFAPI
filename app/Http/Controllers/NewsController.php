@@ -72,7 +72,12 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        return new NewsResource($news);
+//        return new NewsResource($news);
+        $query = QueryBuilder::for(News::where('id', $news->id))
+            ->allowedIncludes('blogers')
+            ->firstOrFail();
+        return new NewsResource($query);
+
     }
 
     /**

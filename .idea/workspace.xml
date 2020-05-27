@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="0b675ed3-e245-467d-bb1e-06a8c36a10e4" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/BlogersCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/BlogersCollection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/NewsCollection.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NewsCollection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/BlogersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/BlogersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/NewsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/BlogersResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/BlogersResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/NewsResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/NewsResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/BlogersRelationshipsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/BlogersRelationshipsTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -153,7 +154,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../bookstore" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RunDashboard">
@@ -187,7 +188,7 @@
       <workItem from="1589873581993" duration="42990000" />
       <workItem from="1590142060123" duration="13068000" />
       <workItem from="1590404285443" duration="1407000" />
-      <workItem from="1590406732700" duration="13341000" />
+      <workItem from="1590406732700" duration="23315000" />
     </task>
     <servers />
   </component>

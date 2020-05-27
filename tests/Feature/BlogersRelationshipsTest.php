@@ -51,20 +51,20 @@ class BlogersRelationshipsTest extends TestCase
                                     ['bloger' => $bloger->id]
                                 ),
                             ],
-                            'data' => [
-                                [
-                                    'id' => $news->get(0)->id,
-                                    'type' => 'news'
-                                ],
-                                [
-                                    'id' => $news->get(1)->id,
-                                    'type' => 'news'
-                                ],
-                                [
-                                    'id' => $news->get(2)->id,
-                                    'type' => 'news'
-                                ]
-                            ]
+//                            'data' => [
+//                                [
+//                                    'id' => $news->get(0)->id,
+//                                    'type' => 'news'
+//                                ],
+//                                [
+//                                    'id' => $news->get(1)->id,
+//                                    'type' => 'news'
+//                                ],
+//                                [
+//                                    'id' => $news->get(2)->id,
+//                                    'type' => 'news'
+//                                ]
+//                            ]
                         ]
                     ]
                 ]
@@ -228,6 +228,88 @@ class BlogersRelationshipsTest extends TestCase
             ->assertStatus(200)
             ->assertJson([
                 'data' => [
+                    [
+                        "id" => '1',
+                        "type" => "news",
+                        "attributes" => [
+                            'title' => $news[0]->title,
+                            'created_at' => $news[0]->created_at->toJSON(),
+                            'updated_at' => $news[0]->updated_at->toJSON(),
+                        ]
+                    ],
+                    [
+                        "id" => '2',
+                        "type" => "news",
+                        "attributes" => [
+                            'title' => $news[1]->title,
+                            'created_at' => $news[1]->created_at->toJSON(),
+                            'updated_at' => $news[1]->updated_at->toJSON(),
+                        ]
+                    ],
+                    [
+                        "id" => '3',
+                        "type" => "news",
+                        "attributes" => [
+                            'title' => $news[2]->title,
+                            'created_at' => $news[2]->created_at->toJSON(),
+                            'updated_at' => $news[2]->updated_at->toJSON(),
+                        ]
+                    ],
+                ]
+            ]);
+    }
+
+    /**
+     * @test
+     * @watch
+     */
+    public function it_includes_related_resource_objects_when_an_include_query_param_is_given()
+    {
+        $bloger = factory(Bloger::class)->create();
+        $news = factory(News::class, 3)->create();
+//        $bloger->authors()->sync($news->pluck('id'));
+        $this->mysync($bloger, $news);
+        $user = factory(User::class)->create();
+        Passport::actingAs($user);
+        $this->getJson('/api/blogers/1?include=news', [
+            'accept' => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json',
+        ])
+            ->assertStatus(200)
+            ->assertJson([
+                'data' => [
+                    'id' => '1',
+                    'type' => 'blogers',
+                    'relationships' => [
+                        'news' => [
+                            'links' => [
+                                'self' => route(
+                                    'blogers.relationships.news',
+                                    ['bloger' => $bloger->id]
+                                ),
+                                'related' => route(
+                                    'blogers.news',
+                                    ['bloger' => $bloger->id]
+                                ),
+                            ],
+                            'data' => [
+                                [
+                                    'id' => (string)$news->get(0)->id,
+                                    'type' => 'news'
+                                ],
+                                [
+                                    'id' => (string)$news->get(1)->id,
+                                    'type' => 'news'
+                                ],
+                                [
+                                'id' => (string)$news->get(2)->id,
+                                'type' => 'news'
+                            ]
+                            ]
+                        ]
+                    ]
+                ],
+                'included' => [
                     [
                         "id" => '1',
                         "type" => "news",
